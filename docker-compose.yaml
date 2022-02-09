@@ -1,0 +1,19 @@
+version: '2.2.3'
+
+services:
+  db:
+    image: mongo:latest
+    container_name: db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: blacklist
+      MONGO_INITDB_ROOT_USERNAME: blacklist-user
+      MONGO_INITDB_ROOT_PASSWORD: blacklist-secret
+
+volumes:
+  postgres: {}
+networks:
+  app-connect:
+    driver: bridge

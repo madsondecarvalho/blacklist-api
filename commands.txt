@@ -1,1 +1,0 @@
-docker run --name blacklist -e POSTGRES_PASSWORD=postgres -d postgres

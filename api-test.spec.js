@@ -2,10 +2,11 @@
 const faker = require('faker-br')
 const document = faker.br.cpf()
 const invalidDocument = "Invalid Document"
+const axios = require('axios');
+
 
 describe("GET / ", () => {
     it(`Should GET main route`, async () => {
-        const axios = require('axios');
         const response = await axios.get(`http://localhost:3000/`);
         expect(response.status).toEqual(200)
     });
@@ -13,7 +14,6 @@ describe("GET / ", () => {
 
 describe("GET /status ", () => {
     it(`Should return API status`, async () => {
-        const axios = require('axios');
         const response = await axios.get(`http://localhost:3000/status`);
         expect(response.status).toEqual(200)
         expect(response.data.uptime).toBeGreaterThan(0)
@@ -22,7 +22,6 @@ describe("GET /status ", () => {
 
 describe("GET /blacklist ", () => {
     it(`Should '{"blacklist": "FREE"} to the document that is not in blacklist'`, async () => {
-        const axios = require('axios');
         const response = await axios.get(`http://localhost:3000/blacklist?document=${document}`);
         expect(response.status).toEqual(200)
         expect(response.data).toEqual({ blacklist: "FREE" })
@@ -31,7 +30,6 @@ describe("GET /blacklist ", () => {
 
 describe("PUT /add ", () => {
     it("Should create a document on blacklist", async () => {
-        const axios = require('axios');
         const response = await axios.put(`http://localhost:3000/add`, { document: document });
         expect(response.status).toEqual(201)
     });
@@ -40,7 +38,6 @@ describe("PUT /add ", () => {
 describe("PUT /add ", () => {
     it("Should NOT create an invalid document on blacklist", async () => {
         try {
-            const axios = require('axios');
             await axios.put(`http://localhost:3000/add`, { document: invalidDocument });
         } catch (error) {
             expect(error.response.status).toEqual(400)
@@ -51,7 +48,6 @@ describe("PUT /add ", () => {
 
 describe("GET /blacklist ", () => {
     it(`Should '{"blacklist": "BLOCK"} to the document in blacklist'`, async () => {
-        const axios = require('axios');
         const response = await axios.get(`http://localhost:3000/blacklist?document=${document}`);
         expect(response.status).toEqual(200)
         expect(response.data).toEqual({ blacklist: "BLOCK" })
@@ -60,7 +56,6 @@ describe("GET /blacklist ", () => {
 
 describe("DELETE /remove ", () => {
     it("Should delete a document from blacklist", async () => {
-        const axios = require('axios');
         const response = await axios.delete(`http://localhost:3000/remove`, { data: { document: document } });
         expect(response.status).toEqual(200)
         expect(response.data).toEqual({ message: "Document deleted from blacklist" })
@@ -69,7 +64,6 @@ describe("DELETE /remove ", () => {
 
 describe("GET /blacklist ", () => {
     it(`Should '{"blacklist": "FREE"} again to the document that is not in blacklist'`, async () => {
-        const axios = require('axios');
         const response = await axios.get(`http://localhost:3000/blacklist?document=${document}`);
         expect(response.status).toEqual(200)
         expect(response.data).toEqual({ blacklist: "FREE" })

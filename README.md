@@ -159,6 +159,3 @@ Necessário enviar um body com um cpf válido
 	"message": "Document deleted from blacklist"
 }
 ```
-
-
-

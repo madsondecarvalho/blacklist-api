@@ -51,7 +51,7 @@ class App {
     }
 
     public async database() {
-        mongoose.connect(`mongodb://${config.database.dbUser}:${config.database.dbPassWord}@${config.database.dbHost}:${config.database.dbPort}`)
+        await mongoose.connect(`mongodb://${config.database.dbUser}:${config.database.dbPassWord}@${config.database.dbHost}:${config.database.dbPort}`)
 
         mongoose.connection.on('error', () => { console.error('mongodb connection error') })
         mongoose.connection.on('open', () => { console.log('mongodb is connected') })

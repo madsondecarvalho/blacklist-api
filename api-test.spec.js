@@ -40,7 +40,6 @@ describe("DELETE / ", () => {
     test("It should delete a document from blacklist", async () => {
         const axios = require('axios');
         const response = await axios.delete(`http://localhost:3000/remove`, { data: { document: document1 } });
-        console.log(response)
         expect(response.status).toEqual(200)
         expect(response.data).toEqual({ message: "Document deleted from blacklist" })
     });

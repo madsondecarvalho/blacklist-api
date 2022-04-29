@@ -54,7 +54,7 @@ class App {
         mongoose.connect(`mongodb://${config.database.dbUser}:${config.database.dbPassWord}@${config.database.dbHost}:${config.database.dbPort}`)
 
         mongoose.connection.on('error', () => { console.error('mongodb connection error') })
-        mongoose.connection.on('open', () => { console.error('mongodb is connected') })
+        mongoose.connection.on('open', () => { console.log('mongodb is connected') })
     }
 }
 
